@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.iflytek.edu</groupId>
+    <artifactId>hive-jdbc-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
+    <repositories>
+        <repository>
+            <id>repo-ifly</id>
+            <url>http://maven.iflytek.com:8081/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>central-repos</id>
+            <name>Central Repository</name>
+            <url>http://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>repo-mirror</id>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>repo1-cache</id>
+            <name>repo1-cache</name>
+            <url>http://maven.iflytek.com:8081/nexus/content/groups/public/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>repo-mirror</id>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+
+        <!--java api jdbc-->
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-jdbc</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        
+    </dependencies>
+
+</project>
