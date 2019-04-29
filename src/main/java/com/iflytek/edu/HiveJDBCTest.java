@@ -27,12 +27,12 @@ public class HiveJDBCTest {
         }
 
         Connection con = DriverManager.getConnection(
-                "jdbc:hive2://192.168.1.100:10000/ztwu", "root", "");
+                "jdbc:hive2://****:20000/edu_bg", "***", "***");
         Statement stmt = con.createStatement();
 
-//        createTable(stmt);
+        createTable(stmt);
 
-        loadData(stmt);
+//        loadData(stmt);
 
         showTable(stmt);
 
@@ -79,7 +79,7 @@ public class HiveJDBCTest {
      * @param stmt
      */
     private static void showTable(Statement stmt) throws Exception{
-        String tableName = "test_hive_jdbc";
+        String tableName = "dim_date";
         // show tables
         String sql = "select * from " + tableName;
         System.out.println(sql);
