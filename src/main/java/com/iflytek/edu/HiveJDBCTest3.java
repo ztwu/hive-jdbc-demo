@@ -3,7 +3,10 @@ package com.iflytek.edu;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.security.UserGroupInformation;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * Created with Intellij IDEA.
@@ -15,7 +18,7 @@ import java.sql.*;
  * jdbc连接hiveserver2,需要在服务器上启动hiveserver2 hive --service hiveserver2
  */
 
-public class HiveJDBCTest {
+public class HiveJDBCTest3 {
 
     private static String driverName =
             "org.apache.hive.jdbc.HiveDriver";
@@ -29,16 +32,20 @@ public class HiveJDBCTest {
             System.exit(1);
         }
 
-        //需要用户去校验
-//        Connection con = DriverManager.getConnection(
-//                "jdbc:hive2://172.31.195.52:20000/edu_bg", "", "");
+        //登录Kerberos账号
+        Configuration configuration = new Configuration();
+        configuration.set("hadoop.security.authentication" , "Kerberos" );
+        System.setProperty("java.security.krb5.conf", "D:\\data\\idea\\java\\private\\github-self-workspace\\hive-jdbc-demo\\src\\main\\resources\\kerberos\\krb5.conf");
+        UserGroupInformation.setConfiguration(configuration);
+        UserGroupInformation.loginUserFromKeytab("hive/hadoop01.ztwu.com@ZTWU.COM",
+                "D:\\data\\idea\\java\\private\\github-self-workspace\\hive-jdbc-demo\\src\\main\\resources\\kerberos\\hive.keytab");
 
         Connection con = DriverManager.getConnection(
-                "jdbc:hive2://172.31.195.52:20000/edu_bg", "mlguo", "");
+                "jdbc:hive2://192.168.223.100:10000/ztwu;principal=hive/hadoop01.ztwu.com@ZTWU.COM", "hive", "");
 
         Statement stmt = con.createStatement();
 
-        createTable(stmt);
+//        createTable(stmt);
 
 //        loadData(stmt);
 
@@ -87,7 +94,7 @@ public class HiveJDBCTest {
      * @param stmt
      */
     private static void showTable(Statement stmt) throws Exception{
-        String tableName = "edu_bg.dim_date";
+        String tableName = "ztwu.test";
         // show tables
         String sql = "select * from " + tableName;
         System.out.println(sql);

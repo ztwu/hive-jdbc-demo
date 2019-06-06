@@ -1,9 +1,9 @@
 package com.iflytek.edu;
 
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.security.UserGroupInformation;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * Created with Intellij IDEA.
@@ -15,7 +15,7 @@ import java.sql.*;
  * jdbc连接hiveserver2,需要在服务器上启动hiveserver2 hive --service hiveserver2
  */
 
-public class HiveJDBCTest {
+public class HiveJDBCTest2 {
 
     private static String driverName =
             "org.apache.hive.jdbc.HiveDriver";
@@ -29,13 +29,12 @@ public class HiveJDBCTest {
             System.exit(1);
         }
 
-        //需要用户去校验
 //        Connection con = DriverManager.getConnection(
-//                "jdbc:hive2://172.31.195.52:20000/edu_bg", "", "");
-
+//                "jdbc:hive2://192.168.1.102:10000/ztwu", "root", "");
+//        Connection con = DriverManager.getConnection(
+//                "jdbc:hive2://192.168.1.100:10000/ztwu", "root", "");
         Connection con = DriverManager.getConnection(
-                "jdbc:hive2://172.31.195.52:20000/edu_bg", "mlguo", "");
-
+                "jdbc:hive2://192.168.1.100:2181,192.168.1.101:2181,192.168.1.102:2181/ztwu;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2", "root", "");
         Statement stmt = con.createStatement();
 
         createTable(stmt);
@@ -51,7 +50,7 @@ public class HiveJDBCTest {
      * @param stmt
      */
     private static void createTable(Statement stmt) throws Exception {
-        String sql = "create table if not EXISTS edu_bg.test_hive_jdbc (" +
+        String sql = "create table if not EXISTS test_hive_jdbc (" +
                 "id int," +
                 "name string" +
                 ")" +
@@ -87,14 +86,13 @@ public class HiveJDBCTest {
      * @param stmt
      */
     private static void showTable(Statement stmt) throws Exception{
-        String tableName = "edu_bg.dim_date";
+        String tableName = "test1";
         // show tables
         String sql = "select * from " + tableName;
         System.out.println(sql);
         ResultSet res = stmt.executeQuery(sql);
         while (res.next()) {
-            System.out.println(String.valueOf(res.getInt(1)) + "\t"
-                    + res.getString(2));
+            System.out.println(String.valueOf(res.getInt(1)));
         }
     }
 
