@@ -21,13 +21,13 @@ public class HiveMetastoreTest {
 
     public static void main(String[] args){
 
-        /*System.setProperty("java.security.krb5.conf", "kerberos/krb5.conf");
-        Configuration configuration = new Configuration();
+        /*Configuration configuration = new Configuration();
         configuration.set("hadoop.security.authentication" , "Kerberos" );
+        System.setProperty("java.security.krb5.conf", "D:\\data\\idea\\java\\private\\github-self-workspace\\hive-jdbc-demo\\src\\main\\resources\\kerberos\\krb5.conf");
         UserGroupInformation.setConfiguration(configuration);
         try {
-            UserGroupInformation.loginUserFromKeytab("mlguo",
-                    "kerberos/user.keytab");
+            UserGroupInformation.loginUserFromKeytab("hive/hadoop01.ztwu.com@ZTWU.COM",
+                    "D:\\data\\idea\\java\\private\\github-self-workspace\\hive-jdbc-demo\\src\\main\\resources\\kerberos\\hive.keytab");
         } catch (IOException e) {
             e.printStackTrace();
         }*/
